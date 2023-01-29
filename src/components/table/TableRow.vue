@@ -1,6 +1,6 @@
 <template>
   <tr>
-    <td v-for="data in rowData" :key="data" class="p-2">
+    <td v-for="data in rowData.data" class="py-2 px-4" @click="goToDetails(data)">
       {{ data }}
     </td>
   </tr>
@@ -10,9 +10,15 @@
 export default {
   props: {
     rowData: {
-      type: Array,
-      default: () => []
+      type: Object,
+      default: () => {}
     },
+  },
+  methods: {
+    goToDetails(row) {
+      console.log('table row comp');
+      // this.$router.push({name: 'detail', params: {id: row.id}})
+    }
   },
 
 }
