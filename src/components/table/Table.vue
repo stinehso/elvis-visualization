@@ -13,20 +13,28 @@
       </tr>
     </thead>
     <tbody>
-      <TableRow v-for="row in tableRows" :key="row.id" :row-data="row" class="divide-y cursor-pointer"
-        @click="goToDetails(row)" />
+      <TableRow v-for="row in tableRows" :key="row.id" :row-data="row" :lang="lang" />
     </tbody>
   </table>
 </template> 
 
 <script>
 import TableRow from './TableRow.vue'
+import moment from 'moment'
 
 export default {
   props: {
     tableData: {
       type: Array,
       default: () => [],
+    },
+    translations: {
+      type: Object,
+      required: true,
+    },
+    lang: {
+      type: String,
+      default: 'no',
     },
   },
   components: {
@@ -37,15 +45,13 @@ export default {
       tableKeys: [
         'id',
         'name',
-        'informationLevel',
         'category',
-        'dataType',
+        'informationLevel',
         'registrationMethod',
-        'status',
+        'dataType',
         'techName',
-        'validFrom',
       ],
-      sortKey: 'name',
+      sortKey: '',
       sortDirectionAsc: true,
     }
   },
@@ -54,7 +60,7 @@ export default {
       return this.tableKeys.map(key => {
         return {
           key: key,
-          label: key,
+          label: this.translations[key],
         }
       })
     },
@@ -62,7 +68,9 @@ export default {
       return this.tableDataSorted.map(entry => {
         return {
           id: entry.id,
+          description: entry.description,
           data: this.tableKeys.map(key => {
+            if (key === 'validFrom') return this.formatDate(entry[key])
             return this.getName(entry[key])
           })
         }
@@ -80,15 +88,23 @@ export default {
         return this.sortDirectionAsc ? result
           : result * -1
       }
-
       return this.tableData.sort(compare)
     },
   },
   methods: {
     getName(data) {
+      const nameKey = this.lang === 'en' ? 'nameEn' : 'name'
       return typeof data === 'object'
-              ? data.name
+              ? data[nameKey]
               : data
+    },
+    formatDate(date) {
+      if (!date) return ''
+      const dateFormat = {
+        no: 'DD.MM.YYYY',
+        en: 'MM/DD/YYYY',
+      }
+      return moment(date, 'DD-MM-YYYY').format(dateFormat[this.lang])
     },
     updateSort(key) {
       if (key === this.sortKey) {
@@ -98,10 +114,6 @@ export default {
       this.sortKey = key
       this.sortDirectionAsc = true
     },
-    goToDetails(row) {
-      console.log('table comp', row);
-      this.$router.push({ name: 'detail', params: { id: row.id } })
-    },
     formatDownloadData() {
       const headers = this.tableHeaders.map(header => header.label).join(';')
       const dataRows = this.tableRows.map(row => {
@@ -109,7 +121,6 @@ export default {
       })
       return `${headers}\n${dataRows.join('\n')}`
     }
-
   }
 }
 </script>

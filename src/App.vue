@@ -1,31 +1,56 @@
-<script setup>
-import { RouterLink, RouterView } from "vue-router";
-import HelloWorld from "./components/HelloWorld.vue";
-</script>
-
 <template>
-  <header>
-    <!-- <img
-      alt="Vue logo"
-      class="logo"
-      src="@/assets/logo.svg"
-      width="125"
-      height="125"
-    /> -->
+  <header class="relative">
+    <div class="flex flex-row">
+        <RouterLink to="/"
+          v-if="notHome"
+          class="flex flex-row items-center py-2 px-4 my-0 mx-1 rounded text-slate-500 hover:text-slate-700"
+        >{{ translations.home }}</RouterLink>
+      <button
+        class="flex flex-row items-center ml-auto p-2 my-0 mx-1 text-slate-500 hover:text-slate-700"
+        type="button" @click="switchLanguage">
+          <i class="material-icons-outlined">language</i>
+      </button>
+    </div>
     <h1 class="text-3xl font-bold text-center">
       ELVIS visualization
     </h1>
     <div class="wrapper">
-      <!-- <HelloWorld msg="You did it!" /> -->
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <!-- <RouterLink to="/about">About</RouterLink> -->
-      </nav>
+      
     </div>
   </header>
 
-  <RouterView />
+  <RouterView
+    :translations="translations"
+    :lang="lang"
+  />
 </template>
+
+  <script>
+  import { RouterLink, RouterView } from "vue-router";
+  import texts from './assets/translations.json';
+
+  export default {
+    data() {
+      return {
+        lang: 'no',
+      }
+    },
+    computed: {
+      translations() {
+        return texts[this.lang]
+      },
+      notHome() {
+        return this.$route.path !== '/'
+      }
+    },
+    methods: {
+      switchLanguage() {
+        if (this.lang === 'no') this.lang = 'en'
+        else this.lang = 'no'
+      }
+    },
+  }
+  </script>
 
 <style scoped>
 header {
@@ -63,31 +88,4 @@ nav a {
 nav a:first-of-type {
   border: 0;
 }
-/* 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-} */
 </style>

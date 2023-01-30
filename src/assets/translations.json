@@ -1,0 +1,40 @@
+{
+  "no": {
+    "home": "Hjem",
+    "search": "Søk",
+    "search_placeholder": "Søketekst",
+    "download_csv": "Last ned csv",
+    "no_of_rows": "Antall treff",
+    "loading": "Laster...",
+    "all_data": "Alle data",
+    "id": "ID",
+    "name": "Navn",
+    "informationLevel": "Informasjonsnivå",
+    "category": "Kategori",
+    "dataType": "Datatype",
+    "registrationMethod": "Registreringsmetode",
+    "status": "Status",
+    "techName": "Teknisk navn",
+    "validFrom": "Gyldig fra",
+    "descriptionOfQuality": "Kvalitet på data"
+  },
+  "en": {
+    "home": "Home",
+    "search": "Search",
+    "search_placeholder": "Search text",
+    "download_csv": "Download csv",
+    "no_of_rows": "Number of hits",
+    "loading": "Loading...",
+    "all_data": "All data",
+    "id": "ID",
+    "name": "Name",
+    "informationLevel": "Information level",
+    "category": "Category",
+    "dataType": "Data type",
+    "registrationMethod": "Registration method",
+    "status": "Status",
+    "techName": "Technical name",
+    "validFrom": "Valid from",
+    "descriptionOfQuality": "Data quality"
+  }
+}

@@ -19,6 +19,10 @@ a,
   transition: 0.4s;
 }
 
+.border-bottom {
+  border-bottom: solid 1px rgb(203 213 225);
+}
+
 @media (hover: hover) {
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
@@ -30,10 +34,4 @@ a,
     display: flex;
     place-items: center;
   }
-
-  /* #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  } */
 }
