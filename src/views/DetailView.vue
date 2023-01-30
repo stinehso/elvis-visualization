@@ -1,7 +1,7 @@
 <template>
   <div v-if="detail" class="px-4">
-    <h2 class="text-2xl mb-4"> #{{ detail.id }} {{ detail[nameKey] }} </h2>
-    <p class="mb-2"> {{ detail[descriptionKey] }} </p>
+    <h2 class="text-2xl mb-4">#{{ detail.id }} {{ detail[nameKey] }}</h2>
+    <p class="mb-2">{{ detail[descriptionKey] }}</p>
 
     <ItemDescription :item="descriptionData('category')" />
     <ItemDescription :item="descriptionData('informationLevel')" />
@@ -12,7 +12,7 @@
 
     <div class="border-bottom mt-8" />
 
-    <h2 class="text-2xl mb-4 mt-8"> {{ translations.all_data }} </h2>
+    <h2 class="text-2xl mb-4 mt-8">{{ translations.all_data }}</h2>
     <div v-for="key in Object.keys(detail)">
       <span class="font-bold mr-2"> {{ key }}: </span>
 
@@ -23,20 +23,19 @@
         </div>
       </span>
       <span v-else> {{ detail[key].toString() }} </span>
-
     </div>
   </div>
 </template>
 
 <script>
-import { httpService } from '../httpService'
-import ItemDescription from '../components/detail/ItemDescription.vue'
+import { httpService } from "../httpService";
+import ItemDescription from "../components/detail/ItemDescription.vue";
 
 export default {
   props: {
     id: {
       type: [Number, String],
-      default: 0
+      default: 0,
     },
     translations: {
       type: Object,
@@ -44,7 +43,7 @@ export default {
     },
     lang: {
       type: String,
-      default: 'no',
+      default: "no",
     },
   },
   components: {
@@ -59,26 +58,26 @@ export default {
         //   name: this.detail.category[nameKey],
         //   description: this.detail.category[descriptionKey]
         // }
-      ]
-    }
+      ],
+    };
   },
   computed: {
     nameKey() {
-      return this.lang === 'en' ? 'nameEn' : 'name'
+      return this.lang === "en" ? "nameEn" : "name";
     },
     descriptionKey() {
-      return this.lang === 'en' ? 'descriptionEn' : 'description'
+      return this.lang === "en" ? "descriptionEn" : "description";
     },
     displayData() {
-      if (!this.detail) return '';
+      if (!this.detail) return "";
       const getData = (data) => {
-        if (!typeof data === 'object') return data;
-        return Object.keys(data).map(key => data[key])
-      }
-      return Object.keys(this.detail).map(key => {
-        return getData(this.detail[key])
-      })
-    }
+        if (!typeof data === "object") return data;
+        return Object.keys(data).map((key) => data[key]);
+      };
+      return Object.keys(this.detail).map((key) => {
+        return getData(this.detail[key]);
+      });
+    },
   },
   mounted() {
     this.getDetail();
@@ -86,10 +85,10 @@ export default {
   methods: {
     async getDetail() {
       try {
-        const res = await httpService.getVariableById(this.id)
-        this.detail = res.data
+        const res = await httpService.getVariableById(this.id);
+        this.detail = res.data;
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
     },
     descriptionData(key) {
@@ -97,19 +96,19 @@ export default {
         type: this.translations[key],
         name: this.detail[key][this.nameKey],
         description: this.detail[key][this.descriptionKey],
-      }
+      };
     },
     descriptionDataCompact(key) {
       return {
         type: this.translations[key],
         name: this.detail[key],
-      }
+      };
     },
     hasNextLevel(data) {
-      return (typeof data === 'object')
+      return typeof data === "object";
     },
-  }
-}
+  },
+};
 </script>
 
 <style>

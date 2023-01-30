@@ -1,5 +1,5 @@
 <template>
-  <h3 class="text-lg mb-1"> {{ item.type }} </h3>
+  <h3 class="text-lg mb-1">{{ item.type }}</h3>
   <div class="flex mb-3">
     <span class="mr-4"> {{ item.name }} </span>
     <span v-if="item.description"> {{ item.description }} </span>
@@ -11,12 +11,10 @@ export default {
   props: {
     item: {
       type: Object,
-      default: () => { }
+      default: () => {},
     },
   },
-}
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

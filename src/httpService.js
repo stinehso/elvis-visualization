@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-const apiRoot = 'https://metadata.kreftregisteret.no/rest/v1';
+const apiRoot = "https://metadata.kreftregisteret.no/rest/v1";
 
 const httpRepository = axios.create({
   baseURL: apiRoot,
@@ -9,19 +9,19 @@ const httpRepository = axios.create({
 export const httpService = {
   listVariables() {
     return httpRepository({
-      method: 'get',
-      url: '/variables',
+      method: "get",
+      url: "/variables",
     });
   },
   searchVariables(keyword) {
     return httpRepository({
-      method: 'get',
+      method: "get",
       url: `/variables/:search?keyword=${keyword}`,
     });
   },
   getVariableById(id) {
     return httpRepository({
-      method: 'get',
+      method: "get",
       url: `/variables/${id}`,
     });
   },

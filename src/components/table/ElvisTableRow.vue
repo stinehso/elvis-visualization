@@ -4,9 +4,12 @@
       {{ data }}
     </td>
   </tr>
-  <tr class="cursor-pointer border-bottom border-slate-400" @click="goToDetails">
+  <tr
+    class="cursor-pointer border-bottom border-slate-400"
+    @click="goToDetails"
+  >
     <td />
-    <td :colspan="rowData.data.length-1" class="pb-2 px-4">
+    <td :colspan="rowData.data.length - 1" class="pb-2 px-4">
       {{ rowData.description }}
     </td>
   </tr>
@@ -17,22 +20,19 @@ export default {
   props: {
     rowData: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     lang: {
       type: String,
-      default: 'no',
-    }
+      default: "no",
+    },
   },
   methods: {
     goToDetails() {
-      this.$router.push({ name: 'detail', params: { id: this.rowData.id } })
+      this.$router.push({ name: "detail", params: { id: this.rowData.id } });
     },
   },
-}
+};
 </script>
 
-<style scoped>
-
-
-</style>
+<style scoped></style>
