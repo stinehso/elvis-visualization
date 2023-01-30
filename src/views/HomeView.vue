@@ -22,7 +22,7 @@
           <i class="material-icons-outlined ml-1" aria-hidden="true">download</i>
         </button>
       </div>
-      <p v-if="!loading">{{ translations.no_of_rows }}: {{ variableData.length }} </p>
+      <p v-if="variableData && !loading">{{ translations.no_of_rows }}: {{ variableData.length }} </p>
     </div>
     
     <Table v-if="variableData && !loading" 
